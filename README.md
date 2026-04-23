@@ -318,19 +318,7 @@ Benefits: **single responsibility** — each class handles one concern; **no cla
 
 ---
 
-### Task 4.2 – Historical Data Management
-
-This task has no conceptual question. The implementation provides `GET /sensors/{sensorId}/readings` to retrieve reading history and `POST /sensors/{sensorId}/readings` to add a new reading. A successful POST also updates the `currentValue` field on the parent `Sensor` object to ensure data consistency across the API.
-
----
-
 ## Part 5: Advanced Error Handling, Exception Mapping & Logging
-
----
-
-### Task 5.1 – Resource Conflict (409 Conflict)
-
-This task has no conceptual question. `RoomNotEmptyException` is thrown when DELETE is attempted on a room that still has sensors. `RoomNotEmptyMapper` (`@Provider`) maps it to HTTP 409 Conflict with a structured JSON error body.
 
 ---
 
@@ -343,12 +331,6 @@ This task has no conceptual question. `RoomNotEmptyException` is thrown when DEL
 **HTTP 404** means the endpoint URL was not found — a routing error. **HTTP 422** means the endpoint was found, the JSON was valid, but the data inside it is semantically incorrect.
 
 When a sensor is posted with a non-existent `roomId`, the URL `/api/v1/sensors` is perfectly reachable — returning 404 would wrongly tell the client the endpoint does not exist. HTTP 422 correctly communicates: "your request was understood and parsed, but the referenced resource does not exist." This gives developers accurate, actionable feedback to fix their data rather than their URL.
-
----
-
-### Task 5.3 – State Constraint (403 Forbidden)
-
-This task has no conceptual question. `SensorUnavailableException` is thrown when a POST reading is attempted on a `MAINTENANCE` sensor. `SensorUnavailableMapper` (`@Provider`) maps it to HTTP 403 Forbidden with a structured JSON body.
 
 ---
 
